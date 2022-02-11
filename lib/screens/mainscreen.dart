@@ -1,6 +1,6 @@
 import 'package:gym/constants/color_constant.dart';
-import 'package:gym/screens/calendar.dart';
 import 'package:gym/screens/dashboard.dart';
+import 'package:gym/screens/scanner.dart';
 import 'package:gym/screens/schedule.dart';
 import 'package:gym/screens/profilepage.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     Schedule(),
     const utama(),
     const ProfilePage(),
-    CalendarPage(),
+    MyApp(),
   ];
 
   @override
