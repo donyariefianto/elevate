@@ -1,10 +1,10 @@
 import 'package:gym/constants/color_constant.dart';
-import 'package:gym/screens/dashboard.dart';
-import 'package:gym/screens/scanner.dart';
+import 'package:gym/screens/payment.dart';
 import 'package:gym/screens/schedule.dart';
 import 'package:gym/screens/profilepage.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/screens/tes.dart';
+import 'package:gym/screens/tes2.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -21,9 +21,8 @@ class _MainScreenState extends State<MainScreen> {
       title: '',
     ),
     Schedule(),
-    const utama(),
-    const ProfilePage(),
-    MyApp(),
+    const Payment(),
+    ProfilePage(),
   ];
 
   @override
@@ -55,10 +54,6 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: ('Profile'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.check),
-              label: ('Tes'),
             ),
           ],
           currentIndex: _selectedIndex,

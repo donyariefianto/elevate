@@ -6,43 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/constants/color_constant.dart';
 import 'package:gym/constants/style_constant.dart';
-import 'package:gym/models/popular_destination_model.dart';
 import 'package:gym/screens/attendance.dart';
-import 'package:gym/screens/prescence.dart';
+import 'package:gym/screens/myclass.dart';
 import 'package:gym/screens/promo.dart';
 import 'package:gym/screens/trainer.dart';
 import 'package:http/http.dart' as http;
-
-Future<List<Photo>> fetchPromo(http.Client client) async {
-  final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/promo'));
-
-  // Use the compute function to run parsePhotos in a separate isolate.
-  return compute(parsePromo, response.body);
-}
-
-List<Photo> parsePromo(String responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  // print(responseBody);
-  return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
-}
-
-class Photo {
-  final int id;
-  final String gambar;
-
-  const Photo({
-    required this.id,
-    required this.gambar,
-  });
-
-  factory Photo.fromJson(Map<String, dynamic> json) {
-    return Photo(
-      id: json['id'] as int,
-      gambar: json['gambar'] as String,
-    );
-  }
-}
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -152,7 +120,7 @@ class PhotosList extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             height: 6,
                             width: 6,
-                            margin: EdgeInsets.only(right: 8),
+                            margin: EdgeInsets.only(left: 15, top: 5),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: _current == index
@@ -162,12 +130,6 @@ class PhotosList extends StatelessWidget {
                         },
                       ),
                     ),
-
-                    // More
-                    Text(
-                      'More...',
-                      style: mMoreDiscountStyle,
-                    )
                   ],
                 ),
               ],
@@ -335,8 +297,7 @@ class PhotosList extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => Prescence()),
+                            MaterialPageRoute(builder: (context) => Myclass()),
                           );
                         },
                         child: Container(
@@ -381,58 +342,39 @@ class PhotosList extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 16, top: 24, bottom: 12),
-            child: Text(
-              'Popular Class!',
-              style: mTitleStyle,
-            ),
-          ),
-          Container(
-            height: 160,
-            child: ListView.builder(
-              itemCount: populars.length,
-              padding: EdgeInsets.only(left: 16, right: 16),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Container(
-                    height: 140,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: mBorderColor, width: 1),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            populars[index].image,
-                            height: 74,
-                          ),
-                          Text(
-                            populars[index].name,
-                            style: mPopularDestinationTitleStyle,
-                          ),
-                          Text(
-                            populars[index].country,
-                            style: mPopularDestinationSubtitleStyle,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
         ],
       ),
+    );
+  }
+}
+
+Future<List<Photo>> fetchPromo(http.Client client) async {
+  final response = await client
+      .get(Uri.parse('https://apidony.000webhostapp.com/api/promo'));
+
+  // Use the compute function to run parsePhotos in a separate isolate.
+  return compute(parsePromo, response.body);
+}
+
+List<Photo> parsePromo(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+  // print(responseBody);
+  return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
+}
+
+class Photo {
+  final int id;
+  final String gambar;
+
+  const Photo({
+    required this.id,
+    required this.gambar,
+  });
+
+  factory Photo.fromJson(Map<String, dynamic> json) {
+    return Photo(
+      id: json['id'] as int,
+      gambar: json['gambar'] as String,
     );
   }
 }

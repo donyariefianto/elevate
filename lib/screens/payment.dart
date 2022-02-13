@@ -6,17 +6,17 @@ import 'package:gym/constants/color_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class Attendance extends StatefulWidget {
-  const Attendance({Key? key}) : super(key: key);
+class Payment extends StatefulWidget {
+  const Payment({Key? key}) : super(key: key);
 
   @override
-  _AttendanceState createState() => _AttendanceState();
+  _PaymentState createState() => _PaymentState();
 }
 
 String token = "";
 String id = "";
 
-class _AttendanceState extends State<Attendance> {
+class _PaymentState extends State<Payment> {
   void initState() {
     super.initState();
     load();
@@ -35,7 +35,7 @@ class _AttendanceState extends State<Attendance> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Attendance',
+          'Payment',
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -44,15 +44,15 @@ class _AttendanceState extends State<Attendance> {
         backgroundColor: mBlueColor,
         elevation: 0,
       ),
-      body: FutureBuilder<List<Attendd>>(
-        future: fetchAttend(http.Client()),
+      body: FutureBuilder<List<Payments>>(
+        future: fetchPay(http.Client()),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(
               child: Text('An error has occurred!'),
             );
           } else if (snapshot.hasData) {
-            return ListAttend(attend: snapshot.data!);
+            return ListPay(pay: snapshot.data!);
           } else {
             return const Center(
               child: CircularProgressIndicator(
@@ -66,16 +66,15 @@ class _AttendanceState extends State<Attendance> {
   }
 }
 
-class ListAttend extends StatelessWidget {
-  const ListAttend({Key? key, required this.attend}) : super(key: key);
-  final List<Attendd> attend;
-
+class ListPay extends StatelessWidget {
+  const ListPay({Key? key, required this.pay}) : super(key: key);
+  final List<Payments> pay;
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
         padding: EdgeInsets.only(bottom: 24),
-        itemCount: attend.length,
+        itemCount: pay.length,
         itemBuilder: (context, index) {
           return Center(
             child: Card(
@@ -93,24 +92,31 @@ class ListAttend extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              attend[index].nama_kelas.toString(),
+                              pay[index].nama_kelas.toString(),
                               style: TextStyle(
                                   fontSize: 22, fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              attend[index].hari.toString() +
+                              pay[index].pm.toString() +
                                   ' ' +
-                                  attend[index].jam,
+                                  pay[index].tgl_jam.toString(),
                               style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.green.shade300,
                                   fontWeight: FontWeight.w600),
                             ),
+                            Text(
+                              pay[index].id_pembayaran.toString(),
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.w600),
+                            ),
                             Container(
                               margin: EdgeInsets.only(top: 12),
                               child: Text(
-                                attend[index].deskripsi.toString(),
-                                maxLines: 3,
+                                pay[index].des.toString(),
+                                maxLines: 4,
                               ),
                             ),
                           ],
@@ -128,51 +134,60 @@ class ListAttend extends StatelessWidget {
   }
 }
 
-Future<List<Attendd>> fetchAttend(http.Client client) async {
+Future<List<Payments>> fetchPay(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/attendance/' + id));
-  return compute(parseatt, response.body);
+      .get(Uri.parse('https://apidony.000webhostapp.com/api/payment/' + id));
+  return compute(parsePayment, response.body);
 }
 
-List<Attendd> parseatt(String responseBody) {
+List<Payments> parsePayment(String responseBody) {
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  return parsed.map<Attendd>((json) => Attendd.fromJson(json)).toList();
+  return parsed.map<Payments>((json) => Payments.fromJson(json)).toList();
 }
 
-class Attendd {
-  final String deskripsi;
-  final int kapasitas;
-  final String nama_kelas;
-  final String jam;
-  final String jam_end;
-  final String hari;
-  final String cin;
-  final String cout;
-  final String nama;
+class Payments {
+  final String? id_member;
+  final String? nama;
+  final String? tipe;
+  final String? tgl_jam;
+  final String? pm;
+  final String? id_pembayaran;
+  final int? harga;
+  final int? total;
+  final String? nama_kelas;
+  final String? promo;
+  final int? diskon;
+  final String? des;
 
-  const Attendd({
-    required this.deskripsi,
-    required this.kapasitas,
-    required this.nama_kelas,
-    required this.jam,
-    required this.jam_end,
-    required this.hari,
-    required this.cin,
-    required this.cout,
-    required this.nama,
+  const Payments({
+    this.id_member,
+    this.nama,
+    this.tipe,
+    this.tgl_jam,
+    this.pm,
+    this.id_pembayaran,
+    this.harga,
+    this.total,
+    this.nama_kelas,
+    this.promo,
+    this.diskon,
+    this.des,
   });
 
-  factory Attendd.fromJson(Map<String, dynamic> json) {
-    return Attendd(
-      deskripsi: json['deskripsi'] as String,
-      kapasitas: json['kapasitas'] as int,
-      nama_kelas: json['nama_kelas'] as String,
-      jam: json['jam'] as String,
-      jam_end: json['jam_end'] as String,
-      hari: json['hari'] as String,
-      cin: json['cin'] as String,
-      cout: json['cout'] as String,
+  factory Payments.fromJson(Map<String, dynamic> json) {
+    return Payments(
+      id_member: json['id_member'] as String,
       nama: json['nama'] as String,
+      tipe: json['tipe'] as String,
+      tgl_jam: json['tgljam'] as String,
+      pm: json['pm'] as String,
+      id_pembayaran: json['id_pembayaran'] as String,
+      harga: json['harga'] as int,
+      total: json['total'] as int,
+      nama_kelas: json['nama_kelas'] as String?,
+      promo: json['promo'] as String,
+      diskon: json['diskon'] as int,
+      des: json['deskripsi'] as String,
     );
   }
 }

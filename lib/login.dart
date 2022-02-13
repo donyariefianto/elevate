@@ -38,10 +38,11 @@ class _LoginPageState extends State<LoginPage> {
       // print(res.statusCode);
       if (res.statusCode == 200) {
         var response = json.decode(res.body);
-        print(response['access_token']);
+        print(response['id']);
         if (response['message'] != null) {
           prefs.setBool('slogin', true);
           prefs.setString('token', response['access_token']);
+          prefs.setString('id', response['id']);
           setState(() {
             visible = false;
           });

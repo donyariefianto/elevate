@@ -87,8 +87,10 @@ class _MyAppState extends State<MyApp> {
                   ElevatedButton(
                       onPressed: () => startBarcodeScanStream(),
                       child: Text('Start barcode scan stream')),
-                  Text('Scan result : $_scanBarcode\n',
-                      style: TextStyle(fontSize: 20))
+                  Text(
+                    'Scan result : $_scanBarcode\n',
+                    style: TextStyle(fontSize: 20),
+                  )
                 ],
               ),
             );

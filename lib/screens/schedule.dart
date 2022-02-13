@@ -43,8 +43,14 @@ class Schedule extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Class'),
-        backgroundColor: mBackgroundColor,
+        title: const Text(
+          'Class',
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: mBackgroundColor),
+        ),
+        backgroundColor: mBlueColor,
         elevation: 0,
       ),
       body: FutureBuilder<List<Clastdy>>(
@@ -79,8 +85,8 @@ class Clstd extends StatelessWidget {
       child: ListView(
         physics: ClampingScrollPhysics(),
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 20, top: 7, bottom: 12),
+          const Padding(
+            padding: EdgeInsets.only(left: 20, top: 12, bottom: 12),
             child: Text(
               'Class Today !',
               style: TextStyle(
