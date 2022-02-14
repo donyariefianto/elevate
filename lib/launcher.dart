@@ -1,3 +1,4 @@
+import 'package:gym/constants/color_constant.dart';
 import 'package:gym/screens/mainscreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -51,18 +52,29 @@ class _LauncherPageState extends State<LauncherPage> {
             colors: [Color(0xff01579b), Color(0xff0d47a1)],
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Center(
-              child: Image.asset(
-                "assets/logo.png",
-                height: 150.0,
-                width: 300.0,
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Center(
+                child: Image.asset(
+                  "assets/logo.png",
+                  height: 150.0,
+                  width: 300.0,
+                ),
               ),
-            ),
-          ],
+              Container(
+                child: const Text(
+                  'Elevate Kupang',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: mBlueColor),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

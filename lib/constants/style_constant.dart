@@ -11,9 +11,9 @@ var mMoreDiscountStyle = const TextStyle(
 
 // // Style for Service Section
 var mServiceTitleStyle = const TextStyle(
-    fontWeight: FontWeight.w500, fontSize: 18, color: mTitleColor);
+    fontWeight: FontWeight.w500, fontSize: 16, color: mTitleColor);
 var mServiceSubtitleStyle = const TextStyle(
-    fontWeight: FontWeight.w400, fontSize: 16, color: mSubtitleColor);
+    fontWeight: FontWeight.w400, fontSize: 14, color: mSubtitleColor);
 
 // // Style for Popular Destination Section
 var mPopularDestinationTitleStyle = const TextStyle(

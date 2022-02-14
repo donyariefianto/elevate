@@ -177,7 +177,7 @@ class PhotosList extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(5.0),
                                       child: Icon(Icons.sports_hockey),
                                     ),
                                     Column(
@@ -232,7 +232,7 @@ class PhotosList extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(5.0),
                                       child: Icon(Icons.class__sharp),
                                     ),
                                     Column(
@@ -294,7 +294,7 @@ class PhotosList extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(5.0),
                                       child: Icon(Icons.info),
                                     ),
                                     Column(
@@ -349,7 +349,7 @@ class PhotosList extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(5.0),
                                       child: Icon(Icons.history_edu_sharp),
                                     ),
                                     Column(
