@@ -91,17 +91,6 @@ class ListClas extends StatelessWidget {
     print(response.body);
   }
 
-  Future scans(http.Client client) async {
-    String barcodeScanRes;
-    barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
-    var params =
-        '?id_memberr=${id}&id_jadwal=1&jenis=scan&cin=${barcodeScanRes}';
-    final response = await client.post(
-        Uri.parse('https://apidony.000webhostapp.com/api/presence' + params));
-    print(response.body);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -129,7 +118,8 @@ class ListClas extends StatelessWidget {
                         children: <Widget>[
                           ElevatedButton(
                             style: raisedButtonStylecin,
-                            onPressed: () {},
+                            onPressed: () =>
+                                cin(http.Client(), listclas[index].id_kelas),
                             child: Text('Check In'),
                           ),
                           SizedBox(
@@ -137,7 +127,8 @@ class ListClas extends StatelessWidget {
                           ),
                           ElevatedButton(
                             style: raisedButtonStylecout,
-                            onPressed: () {},
+                            onPressed: () =>
+                                cout(http.Client(), listclas[index].id_kelas),
                             child: Text('Check Out'),
                           ),
                           // TextButton(

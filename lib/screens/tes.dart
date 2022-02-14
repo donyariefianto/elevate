@@ -8,6 +8,7 @@ import 'package:gym/constants/color_constant.dart';
 import 'package:gym/constants/style_constant.dart';
 import 'package:gym/screens/attendance.dart';
 import 'package:gym/screens/myclass.dart';
+import 'package:gym/screens/mygym.dart';
 import 'package:gym/screens/promo.dart';
 import 'package:gym/screens/trainer.dart';
 import 'package:http/http.dart' as http;
@@ -76,7 +77,7 @@ class PhotosList extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 16, bottom: 24),
                   child: Text(
-                    'Hi, Dony 👋 Welcome To Gym!',
+                    'Hi, 👋 Welcome To Gym!',
                     style: mTitleStyle,
                   ),
                 ),
@@ -251,8 +252,7 @@ class PhotosList extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => Attendance()),
+                            MaterialPageRoute(builder: (context) => MyGym()),
                           );
                         },
                         child: Container(
@@ -281,7 +281,7 @@ class PhotosList extends StatelessWidget {
                                       style: mServiceTitleStyle,
                                     ),
                                     Text(
-                                      'Attendance',
+                                      'Gym',
                                       style: mServiceSubtitleStyle,
                                     )
                                   ],
@@ -322,11 +322,11 @@ class PhotosList extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      'Presence',
+                                      'Attendance',
                                       style: mServiceTitleStyle,
                                     ),
                                     Text(
-                                      'Join The class',
+                                      'Class',
                                       style: mServiceSubtitleStyle,
                                     )
                                   ],
