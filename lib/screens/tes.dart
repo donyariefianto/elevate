@@ -94,12 +94,12 @@ class PhotosList extends StatelessWidget {
                         height: 190.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(
-                                'https://app.elevatekupang.com/assets_user/images/promo/' +
-                                    photos[index].gambar),
-                          ),
+                          // image: DecorationImage(
+                          //   fit: BoxFit.fill,
+                          //   image: NetworkImage(
+                          //       'https://app.elevatekupang.com/assets_user/images/promo/' +
+                          //           photos[index].gambar),
+                          // ),
                         ),
                       );
                     },

@@ -84,10 +84,9 @@ class _Home extends State<Home> {
     String barcodeScanRes;
     barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
-    var params =
-        '?id_memberr=${id}&id_jadwal=1&jenis=SCANN&cin=${barcodeScanRes}';
-    final response = await client.put(
-        Uri.parse('https://apidony.000webhostapp.com/api/presence' + params));
+    var params = '?id_memberr=${id}&id_jadwal=1&cin=${barcodeScanRes}';
+    final response = await client
+        .put(Uri.parse('https://apidony.000webhostapp.com/api/cin' + params));
     print(response.body);
   }
 

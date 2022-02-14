@@ -36,7 +36,7 @@ class _MyclassState extends State<Myclass> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Presence',
+          'Attendance',
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -70,6 +70,27 @@ class _MyclassState extends State<Myclass> {
 class ListClas extends StatelessWidget {
   const ListClas({Key? key, required this.listclas}) : super(key: key);
   final List<Kelas> listclas;
+
+  Future cout(http.Client client, int ids) async {
+    String barcodeScanRes;
+    barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
+    var params = '?id_memberr=${id}&id_jadwal=${ids}';
+    final response = await client.post(Uri.parse(barcodeScanRes + params));
+    print(response.statusCode);
+    print(response.body);
+  }
+
+  Future cin(http.Client client, int ids) async {
+    String barcodeScanRes;
+    barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
+    var params = '?id_memberr=${id}&id_jadwal=${ids}';
+    final response = await client.post(Uri.parse(barcodeScanRes + params));
+    print(response.statusCode);
+    print(response.body);
+  }
+
   Future scans(http.Client client) async {
     String barcodeScanRes;
     barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
@@ -106,15 +127,31 @@ class ListClas extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          TextButton(
-                            child: const Text('Chek In'),
-                            onPressed: () => scans(http.Client()),
+                          ElevatedButton(
+                            style: raisedButtonStylecin,
+                            onPressed: () {},
+                            child: Text('Check In'),
                           ),
-                          const SizedBox(width: 8),
-                          TextButton(
-                            child: const Text('Chek Out'),
-                            onPressed: () {/* ... */},
+                          SizedBox(
+                            width: 10,
                           ),
+                          ElevatedButton(
+                            style: raisedButtonStylecout,
+                            onPressed: () {},
+                            child: Text('Check Out'),
+                          ),
+                          // TextButton(
+                          //   child: const Text('Chek In'),
+                          //   onPressed: () =>
+                          //       cin(http.Client(), listclas[index].id_kelas),
+                          // ),
+                          // const SizedBox(width: 8),
+                          // Icon(Icons.check_outlined),
+                          // TextButton(
+                          //   child: const Text('Chek Out'),
+                          //   onPressed: () =>
+                          //       cout(http.Client(), listclas[index].id_kelas),
+                          // ),
                           const SizedBox(width: 8),
                         ],
                       ),
@@ -131,8 +168,8 @@ class ListClas extends StatelessWidget {
 }
 
 Future<List<Kelas>> fetchClas(http.Client client) async {
-  final response = await client.get(Uri.parse(
-      'https://apidony.000webhostapp.com/api/myclass/MBR22012700001'));
+  final response = await client
+      .get(Uri.parse('https://apidony.000webhostapp.com/api/myclass/$id'));
 
   // Use the compute function to run parselistclas in a separate isolate.
   return compute(parseClass, response.body);
@@ -143,6 +180,25 @@ List<Kelas> parseClass(String responseBody) {
   // print(responseBody);
   return parsed.map<Kelas>((json) => Kelas.fromJson(json)).toList();
 }
+
+final ButtonStyle raisedButtonStylecin = ElevatedButton.styleFrom(
+  onPrimary: Colors.black87,
+  primary: Colors.lightGreen,
+  minimumSize: Size(88, 36),
+  padding: EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(6)),
+  ),
+);
+final ButtonStyle raisedButtonStylecout = ElevatedButton.styleFrom(
+  onPrimary: Colors.black87,
+  primary: Colors.redAccent,
+  minimumSize: Size(88, 36),
+  padding: EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(6)),
+  ),
+);
 
 class Kelas {
   final String hari;
@@ -170,7 +226,7 @@ class Kelas {
       hari: json['hari'] as String,
       jam: json['jam'] as String,
       jam_end: json['jam_end'] as String,
-      id_kelas: json['id_kelas'] as int,
+      id_kelas: json['id'] as int,
       nama_kelas: json['nama_kelas'] as String,
       deskripsi: json['deskripsi'] as String,
       kapasitas: json['kapasitas'] as int,
