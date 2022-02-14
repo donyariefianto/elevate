@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/constants/color_constant.dart';
+import 'package:gym/screens/infocheklog.dart';
 import 'package:gym/screens/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +15,7 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-const String sUrl = "https://apidony.000webhostapp.com/api/logout";
+const String sUrl = "https://api.elevatekupang.com/public/api/logout";
 String token = "";
 String id = "";
 
@@ -74,6 +75,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const PopupMenuItem<int>(
                 value: 1,
+                child: Text("History Payment"),
+              ),
+              const PopupMenuItem<int>(
+                value: 2,
                 child: Text("Logout"),
               ),
             ];
@@ -87,6 +92,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         )),
               );
             } else if (value == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Classclg()),
+              );
+            } else if (value == 2) {
               _logOut();
             }
           }),
@@ -112,112 +122,6 @@ class _ProfilePageState extends State<ProfilePage> {
           }
         },
       ),
-      // body: SafeArea(
-      //   child: Container(
-      //     color: Colors.white,
-      //     child: Center(
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: <Widget>[
-      //           // Text(
-      //           //   "Your Token : $token",
-      //           //   style: TextStyle(fontSize: 20),
-      //           // ),
-      //           Stack(
-      //             alignment: const Alignment(0.6, 0.6),
-      //             children: [
-      //               CircleAvatar(
-      //                 backgroundImage: AssetImage('assets/Yellow.png'),
-      //                 radius: 85,
-      //               ),
-      //               Container(
-      //                 decoration: const BoxDecoration(
-      //                   color: Colors.black45,
-      //                 ),
-      //                 child: const Text(
-      //                   'Mia B',
-      //                   style: TextStyle(
-      //                     fontSize: 20,
-      //                     fontWeight: FontWeight.bold,
-      //                     color: Colors.white,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-
-      //           Column(
-      //             children: [
-      //               ListTile(
-      //                 title: const Text(
-      //                   '1625 Main Street',
-      //                   style: TextStyle(fontWeight: FontWeight.w500),
-      //                 ),
-      //                 subtitle: const Text('My City, CA 99984'),
-      //                 leading: Icon(
-      //                   Icons.restaurant_menu,
-      //                   color: Colors.orange[500],
-      //                 ),
-      //               ),
-      //               ListTile(
-      //                 title: const Text(
-      //                   '(408) 555-1212',
-      //                   style: TextStyle(fontWeight: FontWeight.w500),
-      //                 ),
-      //                 leading: Icon(
-      //                   Icons.contact_phone,
-      //                   color: Colors.orange[500],
-      //                 ),
-      //               ),
-      //               ListTile(
-      //                 title: const Text('costa@example.com'),
-      //                 leading: Icon(
-      //                   Icons.contact_mail,
-      //                   color: Colors.orange[500],
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //           SizedBox(
-      //             height: 90,
-      //           )
-      //           // Container(
-      //           //   padding:
-      //           //       const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-      //           //   child: InkWell(
-      //           //     child: Container(
-      //           //       width: MediaQuery.of(context).size.width,
-      //           //       padding: const EdgeInsets.symmetric(vertical: 15),
-      //           //       alignment: Alignment.center,
-      //           //       decoration: BoxDecoration(
-      //           //         borderRadius:
-      //           //             const BorderRadius.all(Radius.circular(5)),
-      //           //         boxShadow: <BoxShadow>[
-      //           //           BoxShadow(
-      //           //               color: Colors.grey.shade200,
-      //           //               offset: const Offset(2, 4),
-      //           //               blurRadius: 5,
-      //           //               spreadRadius: 2)
-      //           //         ],
-      //           //         gradient: const LinearGradient(
-      //           //           begin: Alignment.centerLeft,
-      //           //           end: Alignment.centerRight,
-      //           //           colors: [Color(0xff01579b), Color(0xff0d47a1)],
-      //           //         ),
-      //           //       ),
-      //           //       child: const Text(
-      //           //         'Logout',
-      //           //         style: TextStyle(fontSize: 20, color: Colors.white),
-      //           //       ),
-      //           //     ),
-      //           //     onTap: _logOut,
-      //           //   ),
-      //           // ),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
@@ -239,10 +143,22 @@ class Profile extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/Yellow.png'),
-                        radius: 75,
+                      Container(
+                        padding: EdgeInsets.only(left: 30, bottom: 24),
+                        width: 190.0,
+                        height: 190.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/images.png'),
+                          ),
+                        ),
                       ),
+                      // CircleAvatar(
+                      //   backgroundImage: AssetImage('assets/images.png'),
+                      //   radius: 75,
+                      // ),
                     ],
                   ),
                 ),
@@ -426,7 +342,7 @@ class Profile extends StatelessWidget {
 
 Future<List<Member>> fetchMember(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/members/${id}'));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/members/${id}'));
   return compute(parseMember, response.body);
 }
 
@@ -445,7 +361,7 @@ class Member {
   final String end;
   final String join;
   final String tipe;
-  final int status;
+  final String? status;
 
   const Member(
       {required this.id,
@@ -470,7 +386,7 @@ class Member {
       end: json['end'] as String,
       join: json['tgl_join'] as String,
       tipe: json['nama_tipe'] as String,
-      status: json['status'] as int,
+      status: json['status'] as String,
     );
   }
 }

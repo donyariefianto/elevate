@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  final String sUrl = "https://apidony.000webhostapp.com/api/";
+  final String sUrl = "https://api.elevatekupang.com/public/api/";
 
   @override
   void initState() {

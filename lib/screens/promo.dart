@@ -77,46 +77,56 @@ class ListPromo extends StatelessWidget {
         itemCount: promot.length,
         itemBuilder: (context, index) {
           return Center(
-            child: Card(
-              child: Container(
-                margin:
-                    EdgeInsets.only(top: 32, left: 18, right: 18, bottom: 32),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://app.elevatekupang.com/assets_user/images/promo/' +
-                              promot[index].gambar),
-                      radius: 48,
-                      backgroundColor: Colors.lightBlue,
-                      child: Text(
-                        promot[index].diskon.toString() + ' %',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(left: 14),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              promot[index].promo.toString(),
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 12),
-                              child:
-                                  Text('Exp. ' + promot[index].exp.toString()),
-                            ),
-                          ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailScreen(todo: promot[index]),
+                  ),
+                );
+              },
+              child: Card(
+                child: Container(
+                  margin:
+                      EdgeInsets.only(top: 32, left: 18, right: 18, bottom: 32),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      CircleAvatar(
+                        //backgroundImage: NetworkImage(
+                        // 'https://app.elevatekupang.com/assets_user/images/promo/' +
+                        //      promot[index].gambar),
+                        radius: 48,
+                        backgroundColor: Colors.blue.shade900,
+                        child: Text(
+                          promot[index].diskon.toString() + ' %',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 14),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                promot[index].promo.toString(),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w600),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 12),
+                                child: Text(
+                                    'Exp. ' + promot[index].exp.toString()),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -127,9 +137,99 @@ class ListPromo extends StatelessWidget {
   }
 }
 
+class DetailScreen extends StatelessWidget {
+  // In the constructor, require a Todo.
+  const DetailScreen({Key? key, required this.todo}) : super(key: key);
+
+  // Declare a field that holds the Todo.
+  final Promotion todo;
+
+  @override
+  Widget build(BuildContext context) {
+    // Use the Todo to create the UI.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          todo.promo,
+          style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: mBackgroundColor),
+        ),
+        backgroundColor: mBlueColor,
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Card(
+          child: Container(
+            padding: EdgeInsets.all(25),
+            width: 900,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  child: Text(
+                    todo.promo,
+                    style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  child: Text(
+                    'Expired ' + todo.exp,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.redAccent),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.local_offer_outlined),
+                    SizedBox(height: 50),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        todo.diskon + ' %',
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  child: Text(
+                    'Deskripsi ',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 Future<List<Promotion>> fetchPromo(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/promo'));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/promo'));
   return compute(parsePromo, response.body);
 }
 
@@ -142,7 +242,7 @@ class Promotion {
   final int id;
   final String gambar;
   final String exp;
-  final int diskon;
+  final String diskon;
   final String promo;
 
   const Promotion({
@@ -158,7 +258,7 @@ class Promotion {
       id: json['id'] as int,
       gambar: json['gambar'] as String,
       exp: json['exp_promo'] as String,
-      diskon: json['diskon'] as int,
+      diskon: json['diskon'] as String,
       promo: json['promo'] as String,
     );
   }

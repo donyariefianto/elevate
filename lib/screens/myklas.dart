@@ -93,85 +93,125 @@ class Clstd extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: clstd.length,
               itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 16),
-                  width: 220,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                            height: 104,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              // image: DecorationImage(
-                              //     // image: NetworkImage(
-                              //     //     'https://app.elevatekupang.com/assets_user/images/promo/promo.jpg'),
-                              //     fit: BoxFit.cover),
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(todo: clstd[index]),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 16),
+                    width: 220,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            Container(
+                              height: 104,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    image: AssetImage('assets/logo.png'),
+                                    fit: BoxFit.cover),
+                              ),
                             ),
-                          ),
-                          Positioned(
-                            child: SvgPicture.asset(
-                                'assets/svg/travlog_top_corner.svg'),
-                            right: 0,
-                          ),
-                          Positioned(
-                            top: 8,
-                            right: 8,
-                            child: Text(
-                              clstd[index].hari.toString(),
-                              style: mTravlogTitleStyle,
+                            Positioned(
+                              child: SvgPicture.asset(
+                                  'assets/svg/travlog_top_corner.svg'),
+                              right: 0,
                             ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            child: SvgPicture.asset(
-                                'assets/svg/travlog_bottom_gradient.svg'),
-                          ),
-                          Positioned(
-                            bottom: 8,
-                            left: 8,
-                            child: Text(
-                              '" ' + clstd[index].nama_kelas.toString() + ' "',
-                              style: mTravlogTitleStyle,
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Text(
+                                clstd[index].hari.toString(),
+                                style: mTravlogTitleStyle,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        clstd[index].deskripsi.toString(),
-                        maxLines: 3,
-                        style: mTravlogContentStyle,
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'At ' +
-                            clstd[index].jam.toString() +
-                            ' - ' +
-                            clstd[index].jam_end.toString(),
-                        style: mTravlogPlaceStyle,
-                      ),
-                    ],
+                            Positioned(
+                              bottom: 0,
+                              child: SvgPicture.asset(
+                                  'assets/svg/travlog_bottom_gradient.svg'),
+                            ),
+                            Positioned(
+                              bottom: 8,
+                              left: 8,
+                              child: Text(
+                                '" ' +
+                                    clstd[index].nama_kelas.toString() +
+                                    ' "',
+                                style: mTravlogTitleStyle,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          clstd[index].deskripsi.toString(),
+                          maxLines: 3,
+                          style: mTravlogContentStyle,
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'At ' +
+                              clstd[index].jam.toString() +
+                              ' - ' +
+                              clstd[index].jam_end.toString(),
+                          style: mTravlogPlaceStyle,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
             ),
           ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 25, top: 25),
-          //   child: Text(
-          //     'Popular',
-          //     style: TextStyle(
-          //         fontSize: 20, fontWeight: FontWeight.w600, color: mBlueColor),
-          //   ),
-          // ),
         ],
+      ),
+    );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  // In the constructor, require a Todo.
+  const DetailScreen({Key? key, required this.todo}) : super(key: key);
+
+  // Declare a field that holds the Todo.
+  final Clastdy todo;
+
+  @override
+  Widget build(BuildContext context) {
+    // Use the Todo to create the UI.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          todo.nama_kelas.toString(),
+          style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: mBackgroundColor),
+        ),
+        backgroundColor: mBlueColor,
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Text(todo.deskripsi.toString()),
+          ],
+        ),
       ),
     );
   }
@@ -179,7 +219,7 @@ class Clstd extends StatelessWidget {
 
 Future<List<Clastdy>> fetchClasstoday(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/myclass/' + id));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/myclass/' + id));
 
   // Use the compute function to run parsePhotos in a separate isolate.
   return compute(parseClstd, response.body);

@@ -11,7 +11,7 @@ String token = "";
 String id = "";
 Future<List<Clastdy>> fetchClasstoday(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/todayClass'));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/todayClass'));
 
   // Use the compute function to run parsePhotos in a separate isolate.
   return compute(parseClstd, response.body);

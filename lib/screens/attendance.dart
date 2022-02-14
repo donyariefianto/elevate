@@ -129,8 +129,8 @@ class ListAttend extends StatelessWidget {
 }
 
 Future<List<Attendd>> fetchAttend(http.Client client) async {
-  final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/attendance/' + id));
+  final response =
+      await client.get(Uri.parse('https://api.elevatekupang.com/public/' + id));
   return compute(parseatt, response.body);
 }
 

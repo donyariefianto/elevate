@@ -10,6 +10,7 @@ import 'package:gym/screens/attendance.dart';
 import 'package:gym/screens/infoclas.dart';
 import 'package:gym/screens/myclass.dart';
 import 'package:gym/screens/mygym.dart';
+import 'package:gym/screens/payment.dart';
 import 'package:gym/screens/promo.dart';
 import 'package:gym/screens/trainer.dart';
 import 'package:http/http.dart' as http;
@@ -95,15 +96,15 @@ class PhotosList extends StatelessWidget {
                       return Container(
                         padding: EdgeInsets.only(left: 30, bottom: 24),
                         width: 190.0,
-                        height: 190.0,
+                        height: 140.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          // image: DecorationImage(
-                          //   fit: BoxFit.fill,
-                          //   image: NetworkImage(
-                          //       'https://app.elevatekupang.com/assets_user/images/promo/' +
-                          //           photos[index].gambar),
-                          // ),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                'https://app.elevatekupang.com/assets_user/images/' +
+                                    photos[index].gambar),
+                          ),
                         ),
                       );
                     },
@@ -163,7 +164,7 @@ class PhotosList extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsets.only(right: 8),
                           padding: EdgeInsets.only(left: 16),
-                          height: 64,
+                          height: 82,
                           decoration: BoxDecoration(
                             color: mFillColor,
                             borderRadius: BorderRadius.circular(12),
@@ -171,24 +172,30 @@ class PhotosList extends StatelessWidget {
                           ),
                           child: Row(
                             children: <Widget>[
-                              // SvgPicture.asset(
-                              //   'assets/svg/service_hotel_icon.svg',
-                              //   fit: BoxFit.contain,
-                              // ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      'Attendance',
-                                      style: mServiceTitleStyle,
+                                padding: const EdgeInsets.all(2),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Icon(Icons.sports_hockey),
                                     ),
-                                    Text(
-                                      'Gym',
-                                      style: mServiceSubtitleStyle,
-                                    )
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                          'Attendance',
+                                          style: mServiceTitleStyle,
+                                        ),
+                                        Text(
+                                          'Gym',
+                                          style: mServiceSubtitleStyle,
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
                               )
@@ -208,7 +215,7 @@ class PhotosList extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsets.only(left: 8),
                           padding: EdgeInsets.only(left: 16),
-                          height: 64,
+                          height: 82,
                           decoration: BoxDecoration(
                             color: mFillColor,
                             borderRadius: BorderRadius.circular(12),
@@ -221,19 +228,29 @@ class PhotosList extends StatelessWidget {
                               //   fit: BoxFit.contain,
                               // ),
                               Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      'Attendance',
-                                      style: mServiceTitleStyle,
+                                padding: EdgeInsets.all(2),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Icon(Icons.class__sharp),
                                     ),
-                                    Text(
-                                      'Class',
-                                      style: mServiceSubtitleStyle,
-                                    )
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                          'Attendance',
+                                          style: mServiceTitleStyle,
+                                        ),
+                                        Text(
+                                          'Class',
+                                          style: mServiceSubtitleStyle,
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
                               )
@@ -260,7 +277,7 @@ class PhotosList extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsets.only(right: 8),
                           padding: EdgeInsets.only(left: 16),
-                          height: 64,
+                          height: 82,
                           decoration: BoxDecoration(
                             color: mFillColor,
                             borderRadius: BorderRadius.circular(12),
@@ -273,19 +290,29 @@ class PhotosList extends StatelessWidget {
                               //   fit: BoxFit.contain,
                               // ),
                               Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      'Class',
-                                      style: mServiceTitleStyle,
+                                padding: EdgeInsets.all(2),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Icon(Icons.info),
                                     ),
-                                    Text(
-                                      'Information',
-                                      style: mServiceSubtitleStyle,
-                                    )
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                          'Class',
+                                          style: mServiceTitleStyle,
+                                        ),
+                                        Text(
+                                          'Information',
+                                          style: mServiceSubtitleStyle,
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
                               )
@@ -305,7 +332,7 @@ class PhotosList extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsets.only(left: 8),
                           padding: EdgeInsets.only(left: 16),
-                          height: 64,
+                          height: 82,
                           decoration: BoxDecoration(
                             color: mFillColor,
                             borderRadius: BorderRadius.circular(12),
@@ -318,19 +345,29 @@ class PhotosList extends StatelessWidget {
                               //   fit: BoxFit.contain,
                               // ),
                               Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      'History',
-                                      style: mServiceTitleStyle,
+                                padding: EdgeInsets.all(2),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Icon(Icons.history_edu_sharp),
                                     ),
-                                    Text(
-                                      'Attendance',
-                                      style: mServiceSubtitleStyle,
-                                    )
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                          'History',
+                                          style: mServiceTitleStyle,
+                                        ),
+                                        Text(
+                                          'Attendance',
+                                          style: mServiceSubtitleStyle,
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
                               )
@@ -344,99 +381,99 @@ class PhotosList extends StatelessWidget {
                 SizedBox(
                   height: 12,
                 ),
-                Row(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Promo()),
-                        );
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 8),
-                        padding: EdgeInsets.only(left: 16),
-                        height: 64,
-                        width: 158,
-                        decoration: BoxDecoration(
-                          color: mFillColor,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: mBorderColor, width: 1),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            // SvgPicture.asset(
-                            //   'assets/svg/trainer.svg',
-                            //   fit: BoxFit.contain,
-                            // ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    'Promo',
-                                    style: mServiceTitleStyle,
-                                  ),
-                                  Text(
-                                    'Promo',
-                                    style: mServiceSubtitleStyle,
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    // Expanded(
-                    //   child: GestureDetector(
-                    //     onTap: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(builder: (context) => Promo()),
-                    //       );
-                    //     },
-                    //     child: Container(
-                    //       margin: EdgeInsets.only(left: 8),
-                    //       padding: EdgeInsets.only(left: 16),
-                    //       height: 64,
-                    //       decoration: BoxDecoration(
-                    //         color: mFillColor,
-                    //         borderRadius: BorderRadius.circular(12),
-                    //         border: Border.all(color: mBorderColor, width: 1),
-                    //       ),
-                    //       child: Row(
-                    //         children: <Widget>[
-                    //           // SvgPicture.asset(
-                    //           //   'assets/svg/service_train_icon.svg',
-                    //           //   fit: BoxFit.contain,
-                    //           // ),
-                    //           Padding(
-                    //             padding: EdgeInsets.only(left: 16),
-                    //             child: Column(
-                    //               crossAxisAlignment: CrossAxisAlignment.start,
-                    //               mainAxisAlignment: MainAxisAlignment.center,
-                    //               children: <Widget>[
-                    //                 Text(
-                    //                   'Promo',
-                    //                   style: mServiceTitleStyle,
-                    //                 ),
-                    //                 Text(
-                    //                   'Intercity',
-                    //                   style: mServiceSubtitleStyle,
-                    //                 )
-                    //               ],
-                    //             ),
-                    //           )
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // )
-                  ],
-                ),
+                // Row(
+                //   children: <Widget>[
+                //     GestureDetector(
+                //       onTap: () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(builder: (context) => Payment()),
+                //         );
+                //       },
+                //       child: Container(
+                //         margin: EdgeInsets.only(right: 8),
+                //         padding: EdgeInsets.only(left: 16),
+                //         height: 82,
+                //         width: 158,
+                //         decoration: BoxDecoration(
+                //           color: mFillColor,
+                //           borderRadius: BorderRadius.circular(12),
+                //           border: Border.all(color: mBorderColor, width: 1),
+                //         ),
+                //         child: Row(
+                //           children: <Widget>[
+                //             // SvgPicture.asset(
+                //             //   'assets/svg/trainer.svg',
+                //             //   fit: BoxFit.contain,
+                //             // ),
+                //             Padding(
+                //               padding: EdgeInsets.only(left: 16),
+                //               child: Column(
+                //                 crossAxisAlignment: CrossAxisAlignment.start,
+                //                 mainAxisAlignment: MainAxisAlignment.center,
+                //                 children: <Widget>[
+                //                   Text(
+                //                     'History',
+                //                     style: mServiceTitleStyle,
+                //                   ),
+                //                   Text(
+                //                     'Payment',
+                //                     style: mServiceSubtitleStyle,
+                //                   )
+                //                 ],
+                //               ),
+                //             )
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //     // Expanded(
+                //     //   child: GestureDetector(
+                //     //     onTap: () {
+                //     //       Navigator.push(
+                //     //         context,
+                //     //         MaterialPageRoute(builder: (context) => Promo()),
+                //     //       );
+                //     //     },
+                //     //     child: Container(
+                //     //       margin: EdgeInsets.only(left: 8),
+                //     //       padding: EdgeInsets.only(left: 16),
+                //     //       height: 82,
+                //     //       decoration: BoxDecoration(
+                //     //         color: mFillColor,
+                //     //         borderRadius: BorderRadius.circular(12),
+                //     //         border: Border.all(color: mBorderColor, width: 1),
+                //     //       ),
+                //     //       child: Row(
+                //     //         children: <Widget>[
+                //     //           // SvgPicture.asset(
+                //     //           //   'assets/svg/service_train_icon.svg',
+                //     //           //   fit: BoxFit.contain,
+                //     //           // ),
+                //     //           Padding(
+                //     //             padding: EdgeInsets.only(left: 16),
+                //     //             child: Column(
+                //     //               crossAxisAlignment: CrossAxisAlignment.start,
+                //     //               mainAxisAlignment: MainAxisAlignment.center,
+                //     //               children: <Widget>[
+                //     //                 Text(
+                //     //                   'Promo',
+                //     //                   style: mServiceTitleStyle,
+                //     //                 ),
+                //     //                 Text(
+                //     //                   'Intercity',
+                //     //                   style: mServiceSubtitleStyle,
+                //     //                 )
+                //     //               ],
+                //     //             ),
+                //     //           )
+                //     //         ],
+                //     //       ),
+                //     //     ),
+                //     //   ),
+                //     // )
+                //   ],
+                // ),
               ],
             ),
           ),
@@ -448,7 +485,7 @@ class PhotosList extends StatelessWidget {
 
 Future<List<Photo>> fetchPromo(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/promo'));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/promo'));
 
   // Use the compute function to run parsePhotos in a separate isolate.
   return compute(parsePromo, response.body);

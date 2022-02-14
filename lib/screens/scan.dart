@@ -76,7 +76,7 @@ class _Home extends State<Home> {
 
   Future<List<Products>> fetchData(http.Client client) async {
     final response = await client
-        .get(Uri.parse('https://apidony.000webhostapp.com/api/products/'));
+        .get(Uri.parse('https://api.elevatekupang.com/public/api/products/'));
     return parsedata(response.body);
   }
 

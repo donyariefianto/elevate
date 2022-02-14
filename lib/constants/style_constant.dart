@@ -3,7 +3,7 @@ import 'color_constant.dart';
 
 // Style for title
 var mTitleStyle = const TextStyle(
-    fontWeight: FontWeight.w600, color: mTitleColor, fontSize: 16);
+    fontWeight: FontWeight.w600, color: mTitleColor, fontSize: 24);
 
 // Style for Discount Section
 var mMoreDiscountStyle = const TextStyle(
@@ -11,9 +11,9 @@ var mMoreDiscountStyle = const TextStyle(
 
 // // Style for Service Section
 var mServiceTitleStyle = const TextStyle(
-    fontWeight: FontWeight.w500, fontSize: 12, color: mTitleColor);
+    fontWeight: FontWeight.w500, fontSize: 18, color: mTitleColor);
 var mServiceSubtitleStyle = const TextStyle(
-    fontWeight: FontWeight.w400, fontSize: 10, color: mSubtitleColor);
+    fontWeight: FontWeight.w400, fontSize: 16, color: mSubtitleColor);
 
 // // Style for Popular Destination Section
 var mPopularDestinationTitleStyle = const TextStyle(

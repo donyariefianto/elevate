@@ -136,7 +136,7 @@ class ListPay extends StatelessWidget {
 
 Future<List<Payments>> fetchPay(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/payment/' + id));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/payment/' + id));
   return compute(parsePayment, response.body);
 }
 
@@ -152,11 +152,11 @@ class Payments {
   final String? tgl_jam;
   final String? pm;
   final String? id_pembayaran;
-  final int? harga;
-  final int? total;
+  final String? harga;
+  final String? total;
   final String? nama_kelas;
   final String? promo;
-  final int? diskon;
+  final String? diskon;
   final String? des;
 
   const Payments({
@@ -166,11 +166,11 @@ class Payments {
     this.tgl_jam,
     this.pm,
     this.id_pembayaran,
-    this.harga,
+    required this.harga,
     this.total,
     this.nama_kelas,
     this.promo,
-    this.diskon,
+    required this.diskon,
     this.des,
   });
 
@@ -182,11 +182,11 @@ class Payments {
       tgl_jam: json['tgljam'] as String,
       pm: json['pm'] as String,
       id_pembayaran: json['id_pembayaran'] as String,
-      harga: json['harga'] as int,
-      total: json['total'] as int,
+      harga: json['harga'] as String,
+      total: json['total'] as String,
       nama_kelas: json['nama_kelas'] as String?,
       promo: json['promo'] as String,
-      diskon: json['diskon'] as int,
+      diskon: json['diskon'] as String,
       des: json['deskripsi'] as String,
     );
   }

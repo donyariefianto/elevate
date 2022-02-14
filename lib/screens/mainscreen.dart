@@ -1,5 +1,6 @@
 import 'package:gym/constants/color_constant.dart';
 import 'package:gym/screens/payment.dart';
+import 'package:gym/screens/promo.dart';
 import 'package:gym/screens/schedule.dart';
 import 'package:gym/screens/profilepage.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
       title: '',
     ),
     kelass(),
-    const Payment(),
+    const Promo(),
     ProfilePage(),
   ];
 
@@ -50,8 +51,8 @@ class _MainScreenState extends State<MainScreen> {
               label: ('My Class'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: ('History'),
+              icon: Icon(Icons.local_offer_outlined),
+              label: ('Promotion'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

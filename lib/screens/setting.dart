@@ -23,56 +23,56 @@ class Settings extends StatelessWidget {
         backgroundColor: mBlueColor,
         elevation: 0,
       ),
-      body: Container(
-        // alignment: Alignment.center,
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                TextField(
-                  controller: _cname,
-                  decoration: const InputDecoration(hintText: 'Enter name'),
-                ),
-                TextField(
-                  controller: _cdesc,
-                  decoration:
-                      const InputDecoration(hintText: 'Enter description'),
-                ),
-                TextField(
-                  controller: _cimg,
-                  decoration: const InputDecoration(hintText: 'Enter img'),
-                ),
-                TextField(
-                  controller: _controller,
-                  decoration: const InputDecoration(hintText: 'Enter price'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Product product = Product(
-                    //   name: _cname.text,
-                    //   price: _controller.text,
-                    //   img: _cimg.text,
-                    //   description: _cdesc.text,
-                    // );
-                    // update(id.toString(), product);
-                    // print(id);
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => MyApp(),
-                    //   ),
-                    // );
-                  },
-                  child: const Text('Update Data'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      // body: Container(
+      //   // alignment: Alignment.center,
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: Card(
+      //     child: Padding(
+      //       padding: const EdgeInsets.all(12.0),
+      //       child: Column(
+      //         mainAxisAlignment: MainAxisAlignment.start,
+      //         children: <Widget>[
+      //           TextField(
+      //             controller: _cname,
+      //             decoration: const InputDecoration(hintText: 'Enter name'),
+      //           ),
+      //           TextField(
+      //             controller: _cdesc,
+      //             decoration:
+      //                 const InputDecoration(hintText: 'Enter description'),
+      //           ),
+      //           TextField(
+      //             controller: _cimg,
+      //             decoration: const InputDecoration(hintText: 'Enter img'),
+      //           ),
+      //           TextField(
+      //             controller: _controller,
+      //             decoration: const InputDecoration(hintText: 'Enter price'),
+      //           ),
+      //           ElevatedButton(
+      //             onPressed: () {
+      //               // Product product = Product(
+      //               //   name: _cname.text,
+      //               //   price: _controller.text,
+      //               //   img: _cimg.text,
+      //               //   description: _cdesc.text,
+      //               // );
+      //               // update(id.toString(), product);
+      //               // print(id);
+      //               // Navigator.push(
+      //               //   context,
+      //               //   MaterialPageRoute(
+      //               //     builder: (context) => MyApp(),
+      //               //   ),
+      //               // );
+      //             },
+      //             child: const Text('Update Data'),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

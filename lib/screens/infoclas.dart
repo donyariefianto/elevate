@@ -89,31 +89,51 @@ class ListClassinf extends StatelessWidget {
                       //     'https://app.elevatekupang.com/assets_user/images/deskripsi/' +
                       //         deskripsit[index].nama_kelas),
                       radius: 48,
-                      backgroundColor: Colors.lightBlue,
+                      backgroundColor: Colors.blue.shade900,
                       child: Text(
                         deskripsit[index].nama_kelas.toString(),
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(left: 14),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              deskripsit[index].deskripsi.toString(),
-                              maxLines: 3,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w600),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailScreen(todo: deskripsit[index]),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: 12),
-                              child: Text('Kapasitas  ' +
-                                  deskripsit[index].kapasitas.toString()),
-                            ),
-                          ],
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(left: 14),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                deskripsit[index].nama_kelas.toString(),
+                                maxLines: 3,
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                deskripsit[index].deskripsi.toString(),
+                                maxLines: 3,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 12),
+                                child: Text('Kapasitas  ' +
+                                    deskripsit[index].kapasitas.toString()),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -128,9 +148,44 @@ class ListClassinf extends StatelessWidget {
   }
 }
 
+class DetailScreen extends StatelessWidget {
+  // In the constructor, require a Todo.
+  const DetailScreen({Key? key, required this.todo}) : super(key: key);
+
+  // Declare a field that holds the Todo.
+  final Classinftion todo;
+
+  @override
+  Widget build(BuildContext context) {
+    // Use the Todo to create the UI.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          todo.nama_kelas,
+          style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: mBackgroundColor),
+        ),
+        backgroundColor: mBlueColor,
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Text(todo.deskripsi),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 Future<List<Classinftion>> fetchClassinf(http.Client client) async {
-  final response =
-      await client.get(Uri.parse('https://apidony.000webhostapp.com/api/pop'));
+  final response = await client
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/pop'));
+  print(response.body);
   return compute(parseClassinf, response.body);
 }
 
@@ -142,9 +197,9 @@ List<Classinftion> parseClassinf(String responseBody) {
 }
 
 class Classinftion {
-  final int id;
+  final String? id;
   final String nama_kelas;
-  final int kapasitas;
+  final String? kapasitas;
   final String deskripsi;
 
   const Classinftion({
@@ -156,9 +211,9 @@ class Classinftion {
 
   factory Classinftion.fromJson(Map<String, dynamic> json) {
     return Classinftion(
-      id: json['id'] as int,
+      id: json['id'],
       nama_kelas: json['nama_kelas'] as String,
-      kapasitas: json['kapasitas'] as int,
+      kapasitas: json['kapasitas'] as String,
       deskripsi: json['deskripsi'] as String,
     );
   }

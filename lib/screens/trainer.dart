@@ -139,7 +139,7 @@ class ListTrainer extends StatelessWidget {
 
 Future<List<Train>> fetchtrain(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/trainer'));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/trainer'));
   return compute(parsetrainer, response.body);
 }
 

@@ -7,6 +7,8 @@ import 'package:gym/constants/color_constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'infocheklog.dart';
+
 class MyGym extends StatefulWidget {
   const MyGym({Key? key}) : super(key: key);
 
@@ -59,7 +61,7 @@ class _MyGymState extends State<MyGym> {
               children: <Widget>[
                 ElevatedButton(
                   style: raisedButtonStylecin,
-                  onPressed: () => cin(http.Client()),
+                  onPressed: () => cin(http.Client(), context),
                   child: Text('Check In'),
                 ),
                 SizedBox(
@@ -67,7 +69,7 @@ class _MyGymState extends State<MyGym> {
                 ),
                 ElevatedButton(
                   style: raisedButtonStylecout,
-                  onPressed: () => cout(http.Client()),
+                  onPressed: () => cout(http.Client(), context),
                   child: Text('Check Out'),
                 ),
                 // TextButton(
@@ -92,24 +94,32 @@ class _MyGymState extends State<MyGym> {
   }
 }
 
-Future cout(http.Client client) async {
+Future cout(http.Client client, BuildContext context) async {
   String barcodeScanRes;
   barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
       '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
   var params = '?id_memberr=${id}&id_jadwal=0';
   final response = await client.post(Uri.parse(barcodeScanRes + params));
-  print(response.statusCode);
-  print(response.body);
+  // print(response.statusCode);
+  // print(response.body);
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Classclg()),
+  );
 }
 
-Future cin(http.Client client) async {
+Future cin(http.Client client, BuildContext context) async {
   String barcodeScanRes;
   barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
       '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
   var params = '?id_memberr=${id}&id_jadwal=0';
   final response = await client.post(Uri.parse(barcodeScanRes + params));
-  print(response.statusCode);
-  print(response.body);
+  // print(response.statusCode);
+  // print(response.body);
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Classclg()),
+  );
 }
 
 final ButtonStyle raisedButtonStylecin = ElevatedButton.styleFrom(

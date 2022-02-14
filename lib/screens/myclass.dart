@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:gym/constants/color_constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'infocheklog.dart';
 
 class Myclass extends StatefulWidget {
   const Myclass({Key? key}) : super(key: key);
@@ -71,24 +74,32 @@ class ListClas extends StatelessWidget {
   const ListClas({Key? key, required this.listclas}) : super(key: key);
   final List<Kelas> listclas;
 
-  Future cout(http.Client client, int ids) async {
+  Future cout(http.Client client, int ids, BuildContext context) async {
     String barcodeScanRes;
     barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
     var params = '?id_memberr=${id}&id_jadwal=${ids}';
     final response = await client.post(Uri.parse(barcodeScanRes + params));
-    print(response.statusCode);
-    print(response.body);
+    // print(response.statusCode);
+    // print(response.body);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Classclg()),
+    );
   }
 
-  Future cin(http.Client client, int ids) async {
+  Future cin(http.Client client, int ids, BuildContext context) async {
     String barcodeScanRes;
     barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
     var params = '?id_memberr=${id}&id_jadwal=${ids}';
     final response = await client.post(Uri.parse(barcodeScanRes + params));
-    print(response.statusCode);
-    print(response.body);
+    // print(response.statusCode);
+    // print(response.body);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Classclg()),
+    );
   }
 
   @override
@@ -118,8 +129,8 @@ class ListClas extends StatelessWidget {
                         children: <Widget>[
                           ElevatedButton(
                             style: raisedButtonStylecin,
-                            onPressed: () =>
-                                cin(http.Client(), listclas[index].id_kelas),
+                            onPressed: () => cin(http.Client(),
+                                listclas[index].id_kelas, context),
                             child: Text('Check In'),
                           ),
                           SizedBox(
@@ -127,8 +138,8 @@ class ListClas extends StatelessWidget {
                           ),
                           ElevatedButton(
                             style: raisedButtonStylecout,
-                            onPressed: () =>
-                                cout(http.Client(), listclas[index].id_kelas),
+                            onPressed: () => cout(http.Client(),
+                                listclas[index].id_kelas, context),
                             child: Text('Check Out'),
                           ),
                           // TextButton(
