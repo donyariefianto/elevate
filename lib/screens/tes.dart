@@ -7,11 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:gym/constants/color_constant.dart';
 import 'package:gym/constants/style_constant.dart';
 import 'package:gym/screens/attendance.dart';
+import 'package:gym/screens/infoclas.dart';
 import 'package:gym/screens/myclass.dart';
 import 'package:gym/screens/mygym.dart';
 import 'package:gym/screens/promo.dart';
 import 'package:gym/screens/trainer.dart';
 import 'package:http/http.dart' as http;
+
+import 'infocheklog.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -144,107 +147,9 @@ class PhotosList extends StatelessWidget {
             ),
           ),
           Container(
-            height: 144,
             margin: EdgeInsets.only(left: 16, right: 16),
             child: Column(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Trainer()),
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(right: 8),
-                          padding: EdgeInsets.only(left: 16),
-                          height: 64,
-                          decoration: BoxDecoration(
-                            color: mFillColor,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: mBorderColor, width: 1),
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              // SvgPicture.asset(
-                              //   'assets/svg/trainer.svg',
-                              //   fit: BoxFit.contain,
-                              // ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      'Trainers',
-                                      style: mServiceTitleStyle,
-                                    ),
-                                    Text(
-                                      'Feel freedom',
-                                      style: mServiceSubtitleStyle,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Promo()),
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(left: 8),
-                          padding: EdgeInsets.only(left: 16),
-                          height: 64,
-                          decoration: BoxDecoration(
-                            color: mFillColor,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: mBorderColor, width: 1),
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              // SvgPicture.asset(
-                              //   'assets/svg/service_train_icon.svg',
-                              //   fit: BoxFit.contain,
-                              // ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      'Promo',
-                                      style: mServiceTitleStyle,
-                                    ),
-                                    Text(
-                                      'Intercity',
-                                      style: mServiceSubtitleStyle,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -337,6 +242,199 @@ class PhotosList extends StatelessWidget {
                         ),
                       ),
                     )
+                  ],
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Classinf()),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(right: 8),
+                          padding: EdgeInsets.only(left: 16),
+                          height: 64,
+                          decoration: BoxDecoration(
+                            color: mFillColor,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: mBorderColor, width: 1),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              // SvgPicture.asset(
+                              //   'assets/svg/trainer.svg',
+                              //   fit: BoxFit.contain,
+                              // ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      'Class',
+                                      style: mServiceTitleStyle,
+                                    ),
+                                    Text(
+                                      'Information',
+                                      style: mServiceSubtitleStyle,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Classclg()),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(left: 8),
+                          padding: EdgeInsets.only(left: 16),
+                          height: 64,
+                          decoration: BoxDecoration(
+                            color: mFillColor,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: mBorderColor, width: 1),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              // SvgPicture.asset(
+                              //   'assets/svg/service_train_icon.svg',
+                              //   fit: BoxFit.contain,
+                              // ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      'History',
+                                      style: mServiceTitleStyle,
+                                    ),
+                                    Text(
+                                      'Attendance',
+                                      style: mServiceSubtitleStyle,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Promo()),
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: 8),
+                        padding: EdgeInsets.only(left: 16),
+                        height: 64,
+                        width: 158,
+                        decoration: BoxDecoration(
+                          color: mFillColor,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: mBorderColor, width: 1),
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            // SvgPicture.asset(
+                            //   'assets/svg/trainer.svg',
+                            //   fit: BoxFit.contain,
+                            // ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'Promo',
+                                    style: mServiceTitleStyle,
+                                  ),
+                                  Text(
+                                    'Promo',
+                                    style: mServiceSubtitleStyle,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Expanded(
+                    //   child: GestureDetector(
+                    //     onTap: () {
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(builder: (context) => Promo()),
+                    //       );
+                    //     },
+                    //     child: Container(
+                    //       margin: EdgeInsets.only(left: 8),
+                    //       padding: EdgeInsets.only(left: 16),
+                    //       height: 64,
+                    //       decoration: BoxDecoration(
+                    //         color: mFillColor,
+                    //         borderRadius: BorderRadius.circular(12),
+                    //         border: Border.all(color: mBorderColor, width: 1),
+                    //       ),
+                    //       child: Row(
+                    //         children: <Widget>[
+                    //           // SvgPicture.asset(
+                    //           //   'assets/svg/service_train_icon.svg',
+                    //           //   fit: BoxFit.contain,
+                    //           // ),
+                    //           Padding(
+                    //             padding: EdgeInsets.only(left: 16),
+                    //             child: Column(
+                    //               crossAxisAlignment: CrossAxisAlignment.start,
+                    //               mainAxisAlignment: MainAxisAlignment.center,
+                    //               children: <Widget>[
+                    //                 Text(
+                    //                   'Promo',
+                    //                   style: mServiceTitleStyle,
+                    //                 ),
+                    //                 Text(
+                    //                   'Intercity',
+                    //                   style: mServiceSubtitleStyle,
+                    //                 )
+                    //               ],
+                    //             ),
+                    //           )
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
               ],

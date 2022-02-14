@@ -2,51 +2,42 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gym/constants/color_constant.dart';
 import 'package:gym/constants/style_constant.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+class kelass extends StatefulWidget {
+  const kelass({Key? key}) : super(key: key);
+
+  @override
+  _kelassState createState() => _kelassState();
+}
 
 String token = "";
 String id = "";
-Future<List<Clastdy>> fetchClasstoday(http.Client client) async {
-  final response = await client
-      .get(Uri.parse('https://apidony.000webhostapp.com/api/todayClass'));
 
-  // Use the compute function to run parsePhotos in a separate isolate.
-  return compute(parseClstd, response.body);
-}
-
-List<Clastdy> parseClstd(String responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  print(responseBody);
-  return parsed.map<Clastdy>((json) => Clastdy.fromJson(json)).toList();
-}
-
-class Clastdy {
-  final String? hari, jam, jam_end, nama_kelas, deskripsi;
-
-  const Clastdy(
-      {this.hari, this.jam, this.jam_end, this.nama_kelas, this.deskripsi});
-
-  factory Clastdy.fromJson(Map<String, dynamic> json) {
-    return Clastdy(
-      hari: json['hari'] as String,
-      jam: json['jam'] as String,
-      jam_end: json['jam_end'] as String,
-      nama_kelas: json['nama_kelas'] as String,
-      deskripsi: json['deskripsi'] as String,
-    );
+class _kelassState extends State<kelass> {
+  void initState() {
+    super.initState();
+    load();
   }
-}
 
-class Schedule extends StatelessWidget {
+  load() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      id = prefs.getString('id')!;
+      token = prefs.getString('token')!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Class',
+          'My Class',
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -90,16 +81,16 @@ class Clstd extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 20, top: 12, bottom: 12),
             child: Text(
-              'My Class',
+              'Class',
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.w600, color: mBlueColor),
             ),
           ),
           Container(
-            height: 181,
+            height: 700,
             child: ListView.builder(
               padding: EdgeInsets.only(left: 16),
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemCount: clstd.length,
               itemBuilder: (context, index) {
                 return Container(
@@ -114,10 +105,10 @@ class Clstd extends StatelessWidget {
                             height: 104,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              image: const DecorationImage(
-                                  image: NetworkImage(
-                                      'https://app.elevatekupang.com/assets_user/images/promo/promo.jpg'),
-                                  fit: BoxFit.cover),
+                              // image: DecorationImage(
+                              //     // image: NetworkImage(
+                              //     //     'https://app.elevatekupang.com/assets_user/images/promo/promo.jpg'),
+                              //     fit: BoxFit.cover),
                             ),
                           ),
                           Positioned(
@@ -172,16 +163,47 @@ class Clstd extends StatelessWidget {
               },
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 25, top: 25),
-            child: Text(
-              'Popular',
-              style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.w600, color: mBlueColor),
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(left: 25, top: 25),
+          //   child: Text(
+          //     'Popular',
+          //     style: TextStyle(
+          //         fontSize: 20, fontWeight: FontWeight.w600, color: mBlueColor),
+          //   ),
+          // ),
         ],
       ),
+    );
+  }
+}
+
+Future<List<Clastdy>> fetchClasstoday(http.Client client) async {
+  final response = await client
+      .get(Uri.parse('https://apidony.000webhostapp.com/api/myclass/' + id));
+
+  // Use the compute function to run parsePhotos in a separate isolate.
+  return compute(parseClstd, response.body);
+}
+
+List<Clastdy> parseClstd(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+  print(responseBody);
+  return parsed.map<Clastdy>((json) => Clastdy.fromJson(json)).toList();
+}
+
+class Clastdy {
+  final String? hari, jam, jam_end, nama_kelas, deskripsi;
+
+  const Clastdy(
+      {this.hari, this.jam, this.jam_end, this.nama_kelas, this.deskripsi});
+
+  factory Clastdy.fromJson(Map<String, dynamic> json) {
+    return Clastdy(
+      hari: json['hari'] as String,
+      jam: json['jam'] as String,
+      jam_end: json['jam_end'] as String,
+      nama_kelas: json['nama_kelas'] as String,
+      deskripsi: json['deskripsi'] as String,
     );
   }
 }

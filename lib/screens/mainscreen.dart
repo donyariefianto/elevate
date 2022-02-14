@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:gym/screens/tes.dart';
 import 'package:gym/screens/tes2.dart';
 
+import 'myklas.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -20,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     const MyHomePage(
       title: '',
     ),
-    Schedule(),
+    kelass(),
     const Payment(),
     ProfilePage(),
   ];
@@ -45,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.class__outlined),
-              label: ('Class'),
+              label: ('My Class'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
