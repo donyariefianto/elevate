@@ -100,8 +100,6 @@ Future cout(http.Client client, BuildContext context) async {
       '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
   var params = '?id_memberr=${id}&id_jadwal=0';
   final response = await client.post(Uri.parse(barcodeScanRes + params));
-  // print(response.statusCode);
-  // print(response.body);
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => Classclg()),
@@ -114,8 +112,6 @@ Future cin(http.Client client, BuildContext context) async {
       '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
   var params = '?id_memberr=${id}&id_jadwal=0';
   final response = await client.post(Uri.parse(barcodeScanRes + params));
-  // print(response.statusCode);
-  // print(response.body);
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => Classclg()),

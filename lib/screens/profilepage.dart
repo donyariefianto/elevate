@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/constants/color_constant.dart';
 import 'package:gym/screens/infocheklog.dart';
+import 'package:gym/screens/payment.dart';
 import 'package:gym/screens/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -94,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
             } else if (value == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Classclg()),
+                MaterialPageRoute(builder: (context) => Payment()),
               );
             } else if (value == 2) {
               _logOut();
@@ -188,12 +189,12 @@ class Profile extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.card_membership,
-                                    color: Colors.blueAccent[400],
+                                    color: Color(0xFF23374D),
                                     size: 35,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20.0,
                                   ),
                                   Column(
@@ -227,7 +228,7 @@ class Profile extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.date_range,
-                                    color: Colors.yellowAccent[400],
+                                    color: Color(0xFF23374D),
                                     size: 35,
                                   ),
                                   const SizedBox(
@@ -262,7 +263,7 @@ class Profile extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.perm_identity_outlined,
-                                    color: Colors.pinkAccent[400],
+                                    color: Color(0xFF23374D),
                                     size: 35,
                                   ),
                                   const SizedBox(
@@ -297,7 +298,7 @@ class Profile extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.data_usage_sharp,
-                                    color: Colors.lightGreen[400],
+                                    color: Color(0xFF23374D),
                                     size: 35,
                                   ),
                                   SizedBox(
@@ -342,7 +343,7 @@ class Profile extends StatelessWidget {
 
 Future<List<Member>> fetchMember(http.Client client) async {
   final response = await client
-      .get(Uri.parse('https://api.elevatekupang.com/public/api/members/${id}'));
+      .get(Uri.parse('https://api.elevatekupang.com/public/api/members/' + id));
   return compute(parseMember, response.body);
 }
 
