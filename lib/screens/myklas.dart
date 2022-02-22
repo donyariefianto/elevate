@@ -112,11 +112,19 @@ class Clstd extends StatelessWidget {
                           children: <Widget>[
                             Container(
                               height: 104,
+                              // decoration: BoxDecoration(
+                              //   borderRadius: BorderRadius.circular(8),
+                              //   image: DecorationImage(
+                              //       image: AssetImage('assets/logo.png'),
+                              //       fit: BoxFit.cover),
+                              // ),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(
-                                    image: AssetImage('assets/logo.png'),
-                                    fit: BoxFit.cover),
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage(
+                                      'https://app.elevatekupang.com/assets_user/img/kelas/' +
+                                          clstd[index].gmbr.toString()),
+                                ),
                               ),
                             ),
                             Positioned(
@@ -133,18 +141,13 @@ class Clstd extends StatelessWidget {
                               ),
                             ),
                             Positioned(
-                              bottom: 0,
-                              child: SvgPicture.asset(
-                                  'assets/svg/travlog_bottom_gradient.svg'),
-                            ),
-                            Positioned(
                               bottom: 8,
                               left: 8,
                               child: Text(
                                 '" ' +
                                     clstd[index].nama_kelas.toString() +
                                     ' "',
-                                style: mTravlogTitleStyle,
+                                style: mServiceTitleStyle,
                               ),
                             ),
                           ],
@@ -184,10 +187,8 @@ class Clstd extends StatelessWidget {
 }
 
 class DetailScreen extends StatelessWidget {
-  // In the constructor, require a Todo.
   const DetailScreen({Key? key, required this.todo}) : super(key: key);
 
-  // Declare a field that holds the Todo.
   final Clastdy todo;
 
   @override
@@ -232,10 +233,15 @@ List<Clastdy> parseClstd(String responseBody) {
 }
 
 class Clastdy {
-  final String? hari, jam, jam_end, nama_kelas, deskripsi;
+  final String? hari, jam, jam_end, nama_kelas, deskripsi, gmbr;
 
   const Clastdy(
-      {this.hari, this.jam, this.jam_end, this.nama_kelas, this.deskripsi});
+      {this.hari,
+      this.jam,
+      this.jam_end,
+      this.nama_kelas,
+      this.deskripsi,
+      this.gmbr});
 
   factory Clastdy.fromJson(Map<String, dynamic> json) {
     return Clastdy(
@@ -244,6 +250,7 @@ class Clastdy {
       jam_end: json['jam_end'] as String,
       nama_kelas: json['nama_kelas'] as String,
       deskripsi: json['deskripsi'] as String,
+      gmbr: json['gambar'] as String,
     );
   }
 }

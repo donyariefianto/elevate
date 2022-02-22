@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gym">
+    package="com.elevatekupang.app">
    <application
         android:label="gym"
         android:icon="@mipmap/launcher_icon">
