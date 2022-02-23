@@ -6,9 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/constants/color_constant.dart';
 import 'package:gym/constants/style_constant.dart';
+import 'package:gym/screens/attendance.dart';
 import 'package:gym/screens/infoclas.dart';
 import 'package:gym/screens/myclass.dart';
 import 'package:gym/screens/mygym.dart';
+import 'package:gym/screens/payment.dart';
+import 'package:gym/screens/promo.dart';
+import 'package:gym/screens/trainer.dart';
 import 'package:http/http.dart' as http;
 
 import 'infocheklog.dart';
@@ -81,53 +85,30 @@ class PhotosList extends StatelessWidget {
                     style: mTitleStyle,
                   ),
                 ),
-                Column(
-                  children: [
-                    if (photos.length == 0) ...[
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 190,
-                        child: Container(
-                          padding: EdgeInsets.only(left: 30, bottom: 24),
-                          width: 190.0,
-                          height: 140.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: const DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  'https://app.elevatekupang.com/assets_user/home.jpg'),
-                            ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 190,
+                  child: Swiper(
+                    autoplay: true,
+                    layout: SwiperLayout.DEFAULT,
+                    itemCount: photos.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: EdgeInsets.only(left: 30, bottom: 24),
+                        width: 190.0,
+                        height: 140.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                'https://app.elevatekupang.com/assets_user/images/' +
+                                    photos[index].gambar),
                           ),
                         ),
-                      )
-                    ] else ...[
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 190,
-                        child: Swiper(
-                          autoplay: true,
-                          layout: SwiperLayout.DEFAULT,
-                          itemCount: photos.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              padding: EdgeInsets.only(left: 30, bottom: 24),
-                              width: 190.0,
-                              height: 140.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                image: const DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                      'https://app.elevatekupang.com/assets_user/home.jpg'),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ]
-                  ],
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 12,

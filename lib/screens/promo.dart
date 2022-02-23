@@ -94,9 +94,9 @@ class ListPromo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://app.elevatekupang.com/assets_user/img/promo/' +
-                                promot[index].gambar),
+                        //backgroundImage: NetworkImage(
+                        // 'https://app.elevatekupang.com/assets_user/images/promo/' +
+                        //      promot[index].gambar),
                         radius: 48,
                         backgroundColor: Colors.blue.shade900,
                         child: Text(

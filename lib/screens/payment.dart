@@ -77,65 +77,53 @@ class ListPay extends StatelessWidget {
         itemCount: pay.length,
         itemBuilder: (context, index) {
           return Center(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailScreen(todo: pay[index]),
-                  ),
-                );
-              },
-              child: Card(
-                child: Container(
-                  margin:
-                      EdgeInsets.only(top: 32, left: 18, right: 18, bottom: 32),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(left: 14),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  pay[index].id_pembayaran.toString(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.blueAccent,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(top: 5, left: 10),
-                                child: Text(
+            child: Card(
+              child: Container(
+                margin:
+                    EdgeInsets.only(top: 32, left: 18, right: 18, bottom: 32),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              pay[index].nama_kelas.toString(),
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              pay[index].pm.toString() +
+                                  ' ' +
                                   pay[index].tgl_jam.toString(),
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.green.shade300,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              pay[index].id_pembayaran.toString(),
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 12),
+                              child: Text(
+                                pay[index].des.toString(),
+                                maxLines: 4,
                               ),
-                              Container(
-                                  padding: EdgeInsets.only(top: 5, left: 10),
-                                  child: Text(pay[index].pm.toString())),
-                              Container(
-                                padding: EdgeInsets.only(top: 5, left: 10),
-                                child: Text(
-                                  'Rp. ' + pay[index].hrg.toString(),
-                                  maxLines: 4,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -146,72 +134,9 @@ class ListPay extends StatelessWidget {
   }
 }
 
-class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key, required this.todo}) : super(key: key);
-
-  final Payments todo;
-
-  @override
-  Widget build(BuildContext context) {
-    // Use the Todo to create the UI.
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Detail Payments',
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: mBackgroundColor),
-        ),
-        backgroundColor: mBlueColor,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Expanded(
-          child: Container(
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      todo.id_pembayaran.toString(),
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 5, left: 10),
-                    child: Text(
-                      todo.tgl_jam.toString(),
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.only(top: 5, left: 10),
-                      child: Text(todo.pm.toString())),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 Future<List<Payments>> fetchPay(http.Client client) async {
   final response = await client
       .get(Uri.parse('https://api.elevatekupang.com/public/api/payment/' + id));
-
   return compute(parsePayment, response.body);
 }
 
@@ -221,32 +146,48 @@ List<Payments> parsePayment(String responseBody) {
 }
 
 class Payments {
+  final String? id_member;
   final String? nama;
+  final String? tipe;
   final String? tgl_jam;
   final String? pm;
   final String? id_pembayaran;
-  final String? kelas;
+  final String? harga;
   final String? total;
-  final String? hrg;
+  final String? nama_kelas;
+  final String? promo;
+  final String? diskon;
+  final String? des;
 
-  const Payments(
-      {this.nama,
-      this.tgl_jam,
-      this.pm,
-      this.id_pembayaran,
-      this.kelas,
-      this.total,
-      this.hrg});
+  const Payments({
+    this.id_member,
+    this.nama,
+    this.tipe,
+    this.tgl_jam,
+    this.pm,
+    this.id_pembayaran,
+    required this.harga,
+    this.total,
+    this.nama_kelas,
+    this.promo,
+    required this.diskon,
+    this.des,
+  });
 
   factory Payments.fromJson(Map<String, dynamic> json) {
     return Payments(
+      id_member: json['id_member'] as String,
       nama: json['nama'] as String,
+      tipe: json['tipe'] as String,
       tgl_jam: json['tgljam'] as String,
       pm: json['pm'] as String,
       id_pembayaran: json['id_pembayaran'] as String,
-      total: json['grand_total'] as String,
-      kelas: json['kelas'] as String,
-      hrg: json['harga'] as String,
+      harga: json['harga'] as String,
+      total: json['total'] as String,
+      nama_kelas: json['nama_kelas'] as String?,
+      promo: json['promo'] as String,
+      diskon: json['diskon'] as String,
+      des: json['deskripsi'] as String,
     );
   }
 }
